@@ -17,7 +17,7 @@ public:
     bool insert(Player player);
     bool removePlayer(int id);
 
-    void sortByScoreInsertion(Player players[], int n);
+    void sortByScoreInsertion();
     void sortByScoreMerge();
 
     Player* formGroup(int groupSize, int delta, int* n);
@@ -27,6 +27,7 @@ public:
     void printWaitingPlayers();
 
     // Outros métodos auxiliares, se necessário
+    bool goesFirst(Player a, Player b);
 };
 
 
