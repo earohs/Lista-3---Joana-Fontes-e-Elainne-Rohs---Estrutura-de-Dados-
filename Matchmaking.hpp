@@ -1,5 +1,5 @@
 #ifndef MATCHMAKING_HPP
-#define MATCKMAKING_HPP
+#define MATCHMAKING_HPP
 #include "Player.hpp"
 
 const int MAX_PLAYERS = 100000;

@@ -11,7 +11,36 @@ Matchmaking::Matchmaking() {
 Matchmaking::~Matchmaking() {
 }
 
+//
+bool Matchmaking::insert(Player player) {
+    if (size >= MAX_PLAYERS) return false;
+    players[size] = player;
+    size++;
 
+    return true;
+}
+
+bool Matchmaking::removePlayer(int id) {
+    
+    int index = -1;
+
+    for (int i = 0; i < size; i++) {
+        if (players[i].getId() == id) {
+            index = i;
+            break;
+        }
+    }
+
+    if (index == -1) return false;
+    for (int i = index; i < size-1; i++) {
+        players[i] = players[i+1];
+    }
+
+    size--;
+    return true;
+}
+
+// Bloco Insertion Sort
 bool Matchmaking::goesFirst(Player a, Player b) {
     if(a.getScore() < b.getScore()) {
         return true; //sem comparar timestamps
