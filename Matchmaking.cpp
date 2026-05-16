@@ -63,3 +63,67 @@ void Matchmaking::sortByScoreInsertion() {
         players[j+1] = key;
     }
 }
+
+
+// usa-se depois de já organizada por score a lista players
+Player* Matchmaking::formGroup(int groupSize, int delta, int* n) {
+    *n = 0;
+
+    if (groupSize > size) return nullptr;
+
+    for (int min = 0; min <= size-groupSize; min++) {
+        int max = min + groupSize - 1;
+        int minScore = players[min].getScore();
+        int maxScore = players[max].getScore();
+
+        if (maxScore - minScore <= delta) {
+            // criação do array dinâmico do grupo formado
+            Player* din_group = new Player[groupSize];
+            
+            for (int i = 0; i < groupSize; i++) {
+                din_group[i] = players[min+i];
+            }
+
+            //remoção, na lista de jogadores em espera, dos jogadores do grupo formado 
+            for (int j = max + 1; j < size; j++) {
+                players[j - groupSize] = players[j];
+            }
+
+            size -= groupSize;
+            *n = groupSize;
+
+            return din_group;
+        }
+    }
+    
+    return nullptr;
+}
+
+Player* Matchmaking::getWaitingPlayers(int* n) {
+    *n = size;
+    if (size == 0) {
+        *n = 0;
+        return nullptr;
+    }
+
+    Player* din_players = new Player[size];
+    
+    for (int i = 0; i < size; i++) {
+        din_players[i] = players[i];
+    }
+
+    return din_players;
+}
+
+void Matchmaking::printWaitingPlayers() {
+    cout << "Waiting Players:" <<endl;
+
+    if (size == 0) {
+        cout << "(None)" << endl;
+        return;
+    }
+
+    for (int i = 0; i < size; i++) {
+        cout << "[" << players[i].getId() <<"|"<< players[i].getName() <<"|"<< players[i].getScore() <<"|"<< players[i].getTimestamp() << "]" << endl; 
+    }
+}
