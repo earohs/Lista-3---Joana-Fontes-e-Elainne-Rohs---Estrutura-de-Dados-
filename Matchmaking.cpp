@@ -1,5 +1,4 @@
 #include "Matchmaking.hpp"
-#include "Player.hpp"
 #include <iostream>
 
 using namespace std;
@@ -14,7 +13,9 @@ Matchmaking::~Matchmaking() {
 //
 bool Matchmaking::insert(Player player) {
     if (size >= MAX_PLAYERS) return false;
+    
     players[size] = player;
+    
     size++;
 
     return true;

@@ -23,9 +23,9 @@ int main() {
 
     cout << "---------------------------" << endl;
 
-    cout << "---- Removing player 2 ----" << endl;
+    cout << "---- Removing player 3 ----" << endl;
 
-    hogwartsCup.removePlayer(2);
+    hogwartsCup.removePlayer(3);
 
     hogwartsCup.printWaitingPlayers();
 
@@ -69,6 +69,50 @@ int main() {
 
     cout << "---------------------------" << endl;
     cout << endl;
+
+    cout << "---- INSERTION vs MERGE SORT ----" << endl;
+
+    Matchmaking insertionTest;
+    Matchmaking mergeTest;
+
+    const int TEST_SIZE = 5000; //Número bem menor que 100000, 
+    //mas dessa forma não dá segmentation fault nem precisa transformar players em array dinâmico
+
+    for (int i = 0; i < TEST_SIZE; i++) {
+
+        int score = rand() % TEST_SIZE;
+
+        insertionTest.insert(Player(i, "Player", score, i));
+        mergeTest.insert(Player(i, "Player", score, i));
+    }
+
+    auto start1 = high_resolution_clock::now();
+
+    insertionTest.sortByScoreInsertion();
+
+    auto end1 = high_resolution_clock::now();
+
+    auto duration1 =
+        duration_cast<milliseconds>(end1 - start1);
+
+    auto start2 = high_resolution_clock::now();
+
+    mergeTest.sortByScoreMerge();
+
+    auto end2 = high_resolution_clock::now();
+
+    auto duration2 =
+        duration_cast<milliseconds>(end2 - start2);
+
+    cout << "Insertion Sort: "
+         << duration1.count()
+         << " ms" << endl;
+
+    cout << "Merge Sort: "
+         << duration2.count()
+         << " ms" << endl;
+
+
 
     return 0;
 }
