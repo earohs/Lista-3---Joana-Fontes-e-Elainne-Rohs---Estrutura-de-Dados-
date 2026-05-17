@@ -8,7 +8,7 @@ Operações permitidas:
 - inserir jogadores;
 - remover jogadores;
 - ordenar jogadores por score;
-- recuperar jogadores em uma fila;
+- gerar um array dinâmico dos jogadores em espera;
 - exibir jogadores aguardando a partida.
 
 # Instruções de compilação
@@ -34,11 +34,8 @@ Execute o programa do arquivo ```matchmaking.exe``` usando o comando:
 # Execução dos testes no main
 
 O arquivo ```main.cpp``` possui testes para:
-- inserção
-- remoção
-- insertion sort
-- merge sort
-- empate de score
-- formação de grupos
-- recuperação de jogadores
-- comparação de desempenho entre ambos algoritmos de organização
+- inserção (de 7 jogadores)
+- remoção (do jogador 3)
+- empate de score (Harry e Neville)
+- formação de grupos (casos com e sem sucesso)
+- insertion sort vs merge sort: comparação de desempenho entre ambos algoritmos de organização
