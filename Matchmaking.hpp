@@ -9,6 +9,9 @@ private:
     Player players[MAX_PLAYERS];
     int size;
 
+    bool goesFirst(Player a, Player b);
+    void mergeSort(int left, int right);
+    void merge(int left, int mid, int right); 
 
 public:
     Matchmaking();
@@ -26,8 +29,6 @@ public:
 
     void printWaitingPlayers();
 
-    // Outros métodos auxiliares, se necessário
-    bool goesFirst(Player a, Player b);
 };
 
 
