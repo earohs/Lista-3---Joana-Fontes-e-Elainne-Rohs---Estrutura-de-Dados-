@@ -8,7 +8,7 @@ Operações permitidas:
 - inserir jogadores;
 - remover jogadores;
 - ordenar jogadores por score;
-- gerar um array dinâmico dos jogadores em espera;
+- recuperação dos jogadores (gerar um array dinâmico dos jogadores em espera);
 - exibir jogadores aguardando a partida.
 
 # Instruções de compilação
@@ -21,7 +21,7 @@ Ao executar esse comando, será criado um arquivo executável chamado ```matchma
 # Instruções de execução
 Execute o programa do arquivo ```matchmaking.exe``` usando o comando:
 ```bash
-.\matchmaking
+.\matchmaking.exe
 ```
 
 # Organização dos arquivos
