@@ -75,7 +75,7 @@ int main() {
     Matchmaking insertionTest;
     Matchmaking mergeTest;
 
-    const int TEST_SIZE = 5000; //Número bem menor que 100000, 
+    int TEST_SIZE = 5000; //Número bem menor que 100000, 
     //mas dessa forma não dá segmentation fault nem precisa transformar players em array dinâmico
 
     for (int i = 0; i < TEST_SIZE; i++) {
@@ -85,6 +85,10 @@ int main() {
         insertionTest.insert(Player(i, "Player", score, i));
         mergeTest.insert(Player(i, "Player", score, i));
     }
+
+    // criando um array dinâmico ou modificando os algoritmos de ordenação para aceitarem array dinãmicos
+    //Player* insertion = insertionTest.getWaitingPlayers(&n);
+    //Player* merge = mergeTest.getWaitingPlayers(&n);
 
     auto start1 = high_resolution_clock::now();
 
@@ -103,6 +107,9 @@ int main() {
 
     auto duration2 =
         duration_cast<milliseconds>(end2 - start2);
+
+    //delete[] merge;
+    //delete[] insertion;
 
     cout << "Insertion Sort: "
          << duration1.count()
