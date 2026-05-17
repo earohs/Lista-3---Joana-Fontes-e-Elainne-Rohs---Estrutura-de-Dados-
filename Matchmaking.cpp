@@ -50,6 +50,7 @@ bool Matchmaking::goesFirst(Player a, Player b) {
     }
 
     // em caso de empate
+    //(nessa simulação o timestamp nunca será o mesmo então, não usa-se <=, só <)
     return a.getTimestamp() < b.getTimestamp();
 }
 void Matchmaking::sortByScoreInsertion() {
@@ -64,6 +65,50 @@ void Matchmaking::sortByScoreInsertion() {
     }
 }
 
+// Bloco Merge Sort
+void Matchmaking::sortByScoreMerge() {
+    if (size <= 1) return;
+    mergeSort(0, size - 1);
+}
+
+void Matchmaking::mergeSort(int left, int right) {
+    if (left >= right) return;
+    int mid = (left + right) / 2;
+    mergeSort(left, mid);
+    mergeSort(mid + 1, right);
+    merge(left, mid, right);
+}
+
+void Matchmaking::merge(int left, int mid, int right) {
+    int sizeLeft  = mid - left + 1;
+    int sizeRight = right - mid;
+
+    Player* L = new Player[sizeLeft];
+    Player* R = new Player[sizeRight];
+
+    for (int i = 0; i < sizeLeft; i++)
+        L[i] = players[left + i];
+    for (int j = 0; j < sizeRight; j++)
+        R[j] = players[mid + 1 + j];
+
+    int i = 0, j = 0, k = left;
+
+    while (i < sizeLeft && j < sizeRight) {
+        if (goesFirst(L[i], R[j])) {
+            players[k] = L[i];
+            i++; k++;
+        } else {
+            players[k] = R[j];
+            j++; k++;
+        }
+    }
+
+    while (i < sizeLeft) { players[k] = L[i]; i++; k++; }
+    while (j < sizeRight) { players[k] = R[j]; j++; k++; }
+
+    delete[] L;
+    delete[] R;
+}
 
 // usa-se depois de já organizada por score a lista players
 Player* Matchmaking::formGroup(int groupSize, int delta, int* n) {
@@ -126,48 +171,4 @@ void Matchmaking::printWaitingPlayers() {
     for (int i = 0; i < size; i++) {
         cout << "[" << players[i].getId() <<"|"<< players[i].getName() <<"|"<< players[i].getScore() <<"|"<< players[i].getTimestamp() << "]" << endl; 
     }
-}
-
-void Matchmaking::sortByScoreMerge() {
-    if (size <= 1) return;
-    mergeSort(0, size - 1);
-}
-
-void Matchmaking::mergeSort(int left, int right) {
-    if (left >= right) return;
-    int mid = (left + right) / 2;
-    mergeSort(left, mid);
-    mergeSort(mid + 1, right);
-    merge(left, mid, right);
-}
-
-void Matchmaking::merge(int left, int mid, int right) {
-    int sizeLeft  = mid - left + 1;
-    int sizeRight = right - mid;
-
-    Player* L = new Player[sizeLeft];
-    Player* R = new Player[sizeRight];
-
-    for (int i = 0; i < sizeLeft; i++)
-        L[i] = players[left + i];
-    for (int j = 0; j < sizeRight; j++)
-        R[j] = players[mid + 1 + j];
-
-    int i = 0, j = 0, k = left;
-
-    while (i < sizeLeft && j < sizeRight) {
-        if (goesFirst(L[i], R[j])) {
-            players[k] = L[i];
-            i++; k++;
-        } else {
-            players[k] = R[j];
-            j++; k++;
-        }
-    }
-
-    while (i < sizeLeft) { players[k] = L[i]; i++; k++; }
-    while (j < sizeRight) { players[k] = R[j]; j++; k++; }
-
-    delete[] L;
-    delete[] R;
 }
