@@ -19,7 +19,11 @@ g++ main.cpp Player.cpp Matchmaking.cpp -o matchmaking
 Ao executar esse comando, será criado um arquivo executável chamado ```matchmaking```.
 
 # Instruções de execução
-Execute o programa do arquivo ```matchmaking.exe``` usando o comando:
+Execute o programa com:
+```bash
+./matchmaking
+```
+No Windows, execute com:
 ```bash
 .\matchmaking.exe
 ```
