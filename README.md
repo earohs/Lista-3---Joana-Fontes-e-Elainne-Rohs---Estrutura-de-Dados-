@@ -25,7 +25,7 @@ Execute o programa com:
 ```
 No Windows, execute com:
 ```bash
-.\matchmaking.exe
+.\matchmaking
 ```
 
 # Organização dos arquivos
